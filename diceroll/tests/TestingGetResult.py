@@ -2,7 +2,7 @@ from random import seed
 from time import time
 from unittest import TestCase
 
-from src import get_result
+from src.parser import get_result
 
 from resources.grammar import GRAMMAR_CALCULATOR, GRAMMAR_DICE
 

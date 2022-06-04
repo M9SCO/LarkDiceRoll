@@ -1,7 +1,6 @@
-from asyncio import run
 from unittest import TestCase
 
-from src import open_lark
+from src.parser import open_lark
 from resources.grammar import GRAMMAR_CALCULATOR
 
 class TesterCalculator(TestCase):

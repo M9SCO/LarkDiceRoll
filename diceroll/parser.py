@@ -5,13 +5,14 @@ from typing import List, Union
 from lark import Lark, Tree
 
 from resources.grammar import GRAMMAR_DICE, GRAMMAR_CALCULATOR
-from src.exceptions import ParseError
+from exceptions import ParseError
 
-__all__ = ["get_result"]
 
 from models import Dice
 
 from models import Result
+
+__all__ = ["get_result"]
 
 
 def simple_calculation(tree: Tree) -> int:

@@ -1,8 +1,7 @@
-from asyncio import run
 from random import seed
 from unittest import TestCase
 
-from src import open_lark
+from src.parser import open_lark
 from models import Dice
 
 from resources.grammar import GRAMMAR_DICE
