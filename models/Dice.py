@@ -1,4 +1,5 @@
 from random import randint
+from typing import List, Optional, Union
 
 from src.exceptions import DiceError
 
@@ -15,7 +16,7 @@ class Dice:
     def __init__(self, throw,
                  face,
                  retain_f=None,
-                 retain_n=None):
+                 retain_n=None) -> None:
         self._throw = throw
         self._face = face
         self._retain_f = retain_f
@@ -24,7 +25,7 @@ class Dice:
         self._result = None
         self._retain = None
 
-    def to_str(self, view_retains=False, startswith_retain='<strike>', endswith_retain='</strike>'):
+    def to_str(self, view_retains=False, startswith_retain='<strike>', endswith_retain='</strike>') -> str:
         if (not isinstance(self._all_result, list) or not self.retains) and view_retains:
             view_retains = False
         if view_retains and isinstance(self._all_result, list) and len(self.result) != len(self._all_result):
@@ -45,7 +46,7 @@ class Dice:
         return f"Dice(throw={self.throw}, face={self.face}, retain_f = {self._retain_f}, " \
                f"retain_n = {self._retain_n}, result = {self.result})"
 
-    def _get_retains(self):
+    def _get_retains(self) -> Optional[List[int]]:
         if self._retain_n is None and self._retain_f is None:
             return None
         elif not all((self._retain_f, self._retain_n)):
@@ -62,34 +63,32 @@ class Dice:
         return results
 
     @property
-    def _all_result(self):
+    def _all_result(self) -> List[int]:
         if not self._result:
             self._result = [randint(1, self._face) for _ in range(self._throw)]
         return self._result
 
     @property
-    def throw(self):
+    def throw(self) -> int:
         return self._throw
 
     @property
-    def face(self):
+    def face(self) -> int:
         return self._face
 
     @property
-    def retains(self):
+    def retains(self) -> Optional[List[int]]:
         if self._retain is None:
             self._retain = self._get_retains()
         return self._retain
 
     @property
-    def result(self):
+    def result(self) -> Optional[List[int]]:
         list_results = self._all_result.copy()
         if self.retains:
             list_results = self._retain
         return list_results
 
     @property
-    def total(self):
-        if isinstance(self.result, int):
-            return self.result
+    def total(self) -> int:
         return sum(self.result)

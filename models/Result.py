@@ -1,13 +1,14 @@
 from dataclasses import dataclass
+from typing import Tuple, List
 
-from .Dice import Dice
+from . import Dice
 
 
 @dataclass
 class Result:
     raw: str
     total: int = None
-    dices: list[tuple[str, Dice]] = None
+    dices: List[Tuple[str, Dice]] = None
 
     @property
     def total_formula(self):

@@ -1,7 +1,7 @@
 from random import seed
 from unittest import TestCase
 
-from src import Dice
+from models.Dice import Dice
 from src.exceptions import DiceError
 
 
