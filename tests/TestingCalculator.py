@@ -2,13 +2,13 @@ from asyncio import run
 from unittest import TestCase
 
 from src import open_lark
-
+from resources.grammar import GRAMMAR_CALCULATOR
 
 class TesterCalculator(TestCase):
     "Checking base math logic"
 
     def run_func(self, f: str, expected: int):
-        self.assertEqual(open_lark(f, "../resources/grammar_calculator.lark"), expected, f"{f}!={expected}")
+        self.assertEqual(open_lark(f, GRAMMAR_CALCULATOR), expected, f"{f}!={expected}")
 
     def testing_sum(self):
         self.run_func("1+1", 2)

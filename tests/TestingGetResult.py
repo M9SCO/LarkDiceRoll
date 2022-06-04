@@ -4,11 +4,13 @@ from unittest import TestCase
 
 from src import get_result
 
+from resources.grammar import GRAMMAR_CALCULATOR, GRAMMAR_DICE
+
 
 class TesterGetResult(TestCase):
 
     def getter(self, formula):
-        return get_result(formula, "../resources/grammar_dice.lark", "../resources/grammar_calculator.lark")
+        return get_result(text=formula, grammar_dice=GRAMMAR_DICE, grammar_calc=GRAMMAR_CALCULATOR)
 
     def setUp(self) -> None:
         seed(1)

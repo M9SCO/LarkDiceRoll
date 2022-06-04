@@ -5,10 +5,12 @@ from unittest import TestCase
 from src import open_lark
 from models import Dice
 
+from resources.grammar import GRAMMAR_DICE
+
 
 class TesterDiceRoller(TestCase):
-    def roll_dice(self, f: str) -> Dice | list[Dice]:
-        return open_lark(f, "../resources/grammar_dice.lark")
+    def roll_dice(self, f: str) -> Dice:
+        return open_lark(f, GRAMMAR_DICE)
 
     def setUp(self) -> None:
         seed(1)
