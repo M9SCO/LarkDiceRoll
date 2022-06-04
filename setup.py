@@ -1,6 +1,6 @@
 from io import open
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 """
 :authors: M_9SCO
@@ -18,6 +18,9 @@ setup(
     url="https://github.com/M9SCO/dicerollhttps://github.com/M9SCO/diceroll",
     download_url="https://github.com/M9SCO/dicerollhttps://github.com/M9SCO/diceroll/arhive/v{}.zip".format(version),
     install_requires=["lark"],
-
-
+    packages=find_packages(),
+    classifiers = [
+                  "Programming Language :: Python :: 3.7",
+                  "License :: MIT license",
+              ],
 )
