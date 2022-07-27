@@ -2,15 +2,12 @@ from random import seed
 from time import time
 from unittest import TestCase
 
-from src.parser import get_result
-
-from resources.grammar import GRAMMAR_CALCULATOR, GRAMMAR_DICE
+from rolling_dice import get_result
 
 
 class TesterGetResult(TestCase):
-
     def getter(self, formula):
-        return get_result(text=formula, grammar_dice=GRAMMAR_DICE, grammar_calc=GRAMMAR_CALCULATOR)
+        return get_result(text=formula)
 
     def setUp(self) -> None:
         seed(1)

@@ -1,18 +1,9 @@
 from operator import add, mul, sub, truediv as div
-from re import findall, search
-from typing import List, Union
+from typing import Union
 
-from lark import Lark, Tree
+from lark import Tree, Lark
 
-from resources.grammar import GRAMMAR_DICE, GRAMMAR_CALCULATOR
-from exceptions import ParseError
-
-
-from models import Dice
-
-from models import Result
-
-__all__ = ["get_result"]
+from rolling_dice.models.Dice import Dice
 
 
 def simple_calculation(tree: Tree) -> int:
@@ -61,23 +52,3 @@ def get_next_point(tree: Tree) -> Union[int, Dice, Tree]:
 
 def open_lark(text, grammar):
     return get_next_point(Lark(grammar, start="start").parse(text))
-
-
-def get_result(text,
-               grammar_dice=GRAMMAR_DICE,
-               grammar_calc=GRAMMAR_CALCULATOR) -> List:
-    results = []
-    repeats_math = search(r"(^\d+)[хx]|[хx](\d+$)", text)
-    repeats = repeats_math.group(1) or repeats_math.group(2) if repeats_math else 1
-    for _ in range(int(repeats) if int(repeats) < 10 else 10):
-        t = text.replace(repeats_math.group(0), "") if repeats_math else text
-        result = Result(raw=t)
-        result.dices = []
-        for dice in findall(r"(\d*[dkдк]\d+[hlвнd]?\d*)", t):
-            value: Dice = open_lark(text=dice, grammar=grammar_dice)
-            result.dices.append((dice, value))
-        result.total = open_lark(text=result.replaced_dices, grammar=grammar_calc)
-        if str(result.total) == t:
-            raise ParseError
-        results.append(result)
-    return results

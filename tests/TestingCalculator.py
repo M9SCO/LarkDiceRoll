@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from src.parser import open_lark
-from resources.grammar import GRAMMAR_CALCULATOR
+from rolling_dice import open_lark, GRAMMAR_CALCULATOR
+
 
 class TesterCalculator(TestCase):
     "Checking base math logic"

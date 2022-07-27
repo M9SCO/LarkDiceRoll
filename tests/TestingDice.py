@@ -1,8 +1,7 @@
 from random import seed
 from unittest import TestCase
 
-from models.Dice import Dice
-from src.exceptions import DiceError
+from rolling_dice import Dice, DiceError
 
 
 class TesterDice(TestCase):

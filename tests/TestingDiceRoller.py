@@ -1,10 +1,7 @@
 from random import seed
 from unittest import TestCase
 
-from src.parser import open_lark
-from models import Dice
-
-from resources.grammar import GRAMMAR_DICE
+from rolling_dice import Dice, GRAMMAR_DICE, open_lark
 
 
 class TesterDiceRoller(TestCase):
