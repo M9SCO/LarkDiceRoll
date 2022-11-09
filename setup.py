@@ -53,11 +53,3 @@ setup(
     ],
     include_package_data=False,
 )
-
-
-"""
-push to pypi:
-
-
-
-"""
