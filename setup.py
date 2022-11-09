@@ -29,7 +29,7 @@ setup(
     name='rolling_dice',
     version=get_version(),
     packages=find_packages(exclude=('tests', 'tests.*')),
-    url='https://github.com/M9SCO/diceroll',
+    url='https://github.com/M9SCO/rolling_dice',
     license='MIT',
     author='Chernov M_9SCO Grigorii',
     author_email='chr.grigorii@gmail.com',
@@ -45,6 +45,7 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Topic :: Software Development :: Libraries :: Application Frameworks',
     ],
     install_requires=[
@@ -52,3 +53,11 @@ setup(
     ],
     include_package_data=False,
 )
+
+
+"""
+push to pypi:
+
+
+
+"""

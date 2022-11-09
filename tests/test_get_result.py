@@ -16,6 +16,11 @@ class TesterGetResult(TestCase):
         '''Количество кинутых кубов должны совпадать c результирующим списком'''
         self.assertEqual(len(self.getter("d20")[0].dices), 1)
 
+
+    def test_get_with_unsetteble_dices_to_rhrows(self):
+        '''Возможна обраьотка неопределённого количества кинутых кубов'''
+        self.assertEqual(self.getter("(2d20)d20")[0].total, 221)
+
     def test_get_with_calculating(self):
         '''сумма должна считаться точно'''
         self.assertEqual(self.getter("2+2*2")[0].total, 6)
