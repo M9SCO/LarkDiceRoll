@@ -24,6 +24,18 @@ class TesterCalculator(TestCase):
     def testing_complex_math_expression(self):
         self.run_func("((2+2)*2+2+2*2)/2", 7)
 
+    def testing_simple_sum(self):
+        self.run_func("2+2", 4)
+
+    def testing_simple_mul(self):
+        self.run_func("2*2", 4)
+
+    def testing_hard_mul_and_div(self):
+        self.run_func("2+2*2", 6)
+
+    def testing_complex_mul_and_div(self):
+        self.run_func("(2+2)*2", 8)
+
     def testing_wrong_formula(self):
         with self.assertRaises(Exception):
             # ToDo Пофиксить на пробрасывание собственной ошибки
