@@ -24,6 +24,8 @@ def get_version() -> str:
     except IndexError:
         raise RuntimeError('Unable to determine version.')
 
+this_directory = pathlib.Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='PowerfulDiceRoller',
@@ -34,7 +36,8 @@ setup(
     author='Chernov M_9SCO Grigorii',
     author_email='chr.grigorii@gmail.com',
     python_requires='>=3.7',
-    description='Is a pretty simple library for rolling dice',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
@@ -46,6 +49,7 @@ setup(
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
         'Topic :: Software Development :: Libraries :: Application Frameworks',
     ],
     install_requires=[
