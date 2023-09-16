@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Tuple, List
 
-from rolling_dice.models.Dice import Dice
+from PowerfulDiceRoller.models.Dice import Dice
 
 
 @dataclass

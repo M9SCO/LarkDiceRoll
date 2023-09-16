@@ -2,7 +2,7 @@ from random import seed
 from time import time
 from unittest import TestCase
 
-from rolling_dice import get_result
+from PowerfulDiceRoller import get_result
 
 
 class TesterGetResult(TestCase):

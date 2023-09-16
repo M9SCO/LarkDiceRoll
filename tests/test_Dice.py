@@ -1,7 +1,7 @@
 from random import seed
 from unittest import TestCase
 
-from rolling_dice import Dice, DiceError
+from PowerfulDiceRoller import Dice, DiceError
 
 
 class TesterDice(TestCase):

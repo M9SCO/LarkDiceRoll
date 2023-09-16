@@ -3,7 +3,7 @@ from typing import Union
 
 from lark import Tree, Lark
 
-from rolling_dice.models.Dice import Dice
+from PowerfulDiceRoller.models.Dice import Dice
 
 
 def simple_calculation(tree: Tree) -> int:

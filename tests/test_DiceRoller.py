@@ -1,7 +1,7 @@
 from random import seed
 from unittest import TestCase
 
-from rolling_dice import Dice, GRAMMAR_DICE, open_lark
+from PowerfulDiceRoller import Dice, GRAMMAR_DICE, open_lark
 
 
 class TesterDiceRoller(TestCase):

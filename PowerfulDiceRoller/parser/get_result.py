@@ -1,11 +1,11 @@
 from re import search, findall
 from typing import List
 
-from rolling_dice.models.Dice import Dice
-from rolling_dice.models.Result import Result
-from rolling_dice.models.errors.ParseError import ParseError
-from rolling_dice.parser.lark_laboers import open_lark
-from rolling_dice.resources import GRAMMAR_DICE, GRAMMAR_CALCULATOR
+from PowerfulDiceRoller.models.Dice import Dice
+from PowerfulDiceRoller.models.Result import Result
+from PowerfulDiceRoller.models.errors.ParseError import ParseError
+from PowerfulDiceRoller.parser.lark_laboers import open_lark
+from PowerfulDiceRoller.resources import GRAMMAR_DICE, GRAMMAR_CALCULATOR
 
 
 def get_result(text,

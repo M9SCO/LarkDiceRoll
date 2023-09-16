@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from rolling_dice import open_lark, GRAMMAR_CALCULATOR
+from PowerfulDiceRoller import open_lark, GRAMMAR_CALCULATOR
 
 
 class TesterCalculator(TestCase):
