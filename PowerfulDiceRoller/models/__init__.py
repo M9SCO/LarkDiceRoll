@@ -1,10 +1,10 @@
 from PowerfulDiceRoller.models.errors import DiceError, NotFoundMethod, ParseError
-from PowerfulDiceRoller.models.Dice import Dice
-from PowerfulDiceRoller.models.Result import Result
+from PowerfulDiceRoller.models.DiceThrown import DiceThrown
+from PowerfulDiceRoller.models.LarkThrown import LarkThrown
 
 __all__ = (
-    "Dice",
-    "Result",
+    "DiceThrown",
+    "LarkThrown",
     "DiceError",
     "NotFoundMethod",
     "ParseError"

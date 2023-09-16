@@ -1,11 +1,11 @@
 from random import seed
 from unittest import TestCase
 
-from PowerfulDiceRoller import Dice, GRAMMAR_DICE, open_lark
+from PowerfulDiceRoller import DiceThrown, GRAMMAR_DICE, open_lark
 
 
 class TesterDiceRoller(TestCase):
-    def roll_dice(self, f: str) -> Dice:
+    def roll_dice(self, f: str) -> DiceThrown:
         return open_lark(f, GRAMMAR_DICE)
 
     def setUp(self) -> None:

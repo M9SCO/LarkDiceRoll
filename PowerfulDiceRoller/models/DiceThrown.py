@@ -4,7 +4,7 @@ from typing import List, Optional
 from PowerfulDiceRoller.models.errors.DiceError import DiceError
 
 
-class Dice:
+class DiceThrown:
     __slots__ = ("_throw",
                  "_face",
                  "_retain_f",

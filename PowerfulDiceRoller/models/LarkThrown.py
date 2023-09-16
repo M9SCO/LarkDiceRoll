@@ -1,14 +1,14 @@
 from dataclasses import dataclass
 from typing import Tuple, List
 
-from PowerfulDiceRoller.models.Dice import Dice
+from PowerfulDiceRoller.models.DiceThrown import DiceThrown
 
 
 @dataclass
-class Result:
+class LarkThrown:
     raw: str
     total: int = None
-    dices: List[Tuple[str, Dice]] = None
+    dices: List[Tuple[str, DiceThrown]] = None
 
     @property
     def total_formula(self) -> str:

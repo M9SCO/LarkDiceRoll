@@ -3,7 +3,7 @@ from typing import Union
 
 from lark import Tree, Lark
 
-from PowerfulDiceRoller.models.Dice import Dice
+from PowerfulDiceRoller.models.DiceThrown import DiceThrown
 
 
 def simple_calculation(tree: Tree) -> int:
@@ -18,16 +18,16 @@ def simple_calculation(tree: Tree) -> int:
         return div(*values)
 
 
-def parse_roll_dice(tree: Tree) -> Dice:
+def parse_roll_dice(tree: Tree) -> DiceThrown:
     if len(tree.children) == 2:
         thrown, face = [get_next_point(child) for child in tree.children]
     else:
         thrown, face = 1, get_next_point(*tree.children)
-    return Dice(throw=thrown, face=face)
+    return DiceThrown(throw=thrown, face=face)
 
 
-def filtration_dices(tree: Tree) -> Dice:
-    dice: Dice = get_next_point(tree.children[0])
+def filtration_dices(tree: Tree) -> DiceThrown:
+    dice: DiceThrown = get_next_point(tree.children[0])
 
     if tree.data == "max":
         dice._retain_f = max
@@ -37,7 +37,7 @@ def filtration_dices(tree: Tree) -> Dice:
     return dice
 
 
-def get_next_point(tree: Tree) -> Union[int, Dice, Tree]:
+def get_next_point(tree: Tree) -> Union[int, DiceThrown, Tree]:
     if tree.data in ("add", "sub", "mul", "div"):
         return simple_calculation(tree)
     elif tree.data == "to_int":
