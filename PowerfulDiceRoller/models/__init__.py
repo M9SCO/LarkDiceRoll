@@ -1,7 +1,7 @@
 from PowerfulDiceRoller.models.Dice import Dice
 from PowerfulDiceRoller.models.DiceThrown import DiceThrown
 from PowerfulDiceRoller.models.LarkThrown import LarkThrown
-from PowerfulDiceRoller.models.errors import DiceError, NotFoundMethod, ParseError
+from PowerfulDiceRoller.models.errors import DiceError, NotFoundMethod, ParseError, NegativeDiceFaces
 
 __all__ = (
     "Dice",
@@ -9,5 +9,6 @@ __all__ = (
     "LarkThrown",
     "DiceError",
     "NotFoundMethod",
-    "ParseError"
+    "ParseError",
+    "NegativeDiceFaces"
 )
