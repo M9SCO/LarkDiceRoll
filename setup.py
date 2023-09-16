@@ -9,7 +9,7 @@ WORK_DIR = pathlib.Path(__file__).parent
 MINIMAL_PY_VERSION = (3, 7)
 
 if sys.version_info < MINIMAL_PY_VERSION:
-    raise RuntimeError('rolling_dice works only with Python {}+'.format('.'.join(map(str, MINIMAL_PY_VERSION))))
+    raise RuntimeError('PowerfulDiceRoller works only with Python {}+'.format('.'.join(map(str, MINIMAL_PY_VERSION))))
 
 
 def get_version() -> str:
@@ -18,7 +18,7 @@ def get_version() -> str:
 
     :return: str
     """
-    txt = (WORK_DIR / 'rolling_dice' / '__init__.py').read_text('utf-8')
+    txt = (WORK_DIR / 'PowerfulDiceRoller' / '__init__.py').read_text('utf-8')
     try:
         return re.findall(r"^__version__ = '([^']+)'\r?$", txt, re.M)[0]
     except IndexError:
@@ -26,10 +26,10 @@ def get_version() -> str:
 
 
 setup(
-    name='rolling_dice',
+    name='PowerfulDiceRoller',
     version=get_version(),
     packages=find_packages(exclude=('tests', 'tests.*')),
-    url='https://github.com/M9SCO/rolling_dice',
+    url='https://github.com/M9SCO/PowerfulDiceRoller',
     license='MIT',
     author='Chernov M_9SCO Grigorii',
     author_email='chr.grigorii@gmail.com',

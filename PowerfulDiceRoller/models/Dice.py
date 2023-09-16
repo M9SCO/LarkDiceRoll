@@ -1,7 +1,7 @@
 from random import randint
 from typing import List, Optional
 
-from rolling_dice.models.errors.DiceError import DiceError
+from PowerfulDiceRoller.models.errors.DiceError import DiceError
 
 
 class Dice:
