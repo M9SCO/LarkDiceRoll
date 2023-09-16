@@ -14,7 +14,7 @@ class LarkThrown:
     def total_formula(self) -> str:
         result = self.raw
         for dice, cls in self.dices:
-            result = result.replace(dice, cls.to_str(view_retains=True, ), 1)
+            result = result.replace(dice, cls.to_str(view_strike=True, ), 1)
         return result + f"={self.total}"
 
     @property

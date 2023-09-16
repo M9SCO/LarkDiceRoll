@@ -1,94 +1,88 @@
-from random import randint
-from typing import List, Optional
+import typing
 
+from PowerfulDiceRoller.models.Dice import Dice
 from PowerfulDiceRoller.models.errors.DiceError import DiceError
 
 
 class DiceThrown:
-    __slots__ = ("_throw",
+    __slots__ = ("_times",
                  "_face",
-                 "_retain_f",
-                 "_retain_n",
+                 "_amount_function",
+                 "_amount_rate",
                  "_result",
-                 "_retain",
+                 "_amount",
+                 "_dices",
                  )
 
-    def __init__(self, throw,
-                 face,
-                 retain_f=None,
-                 retain_n=None) -> None:
-        self._throw = throw
-        self._face = face
-        self._retain_f = retain_f
-        self._retain_n = retain_n
+    def __init__(self,
+                 times: int,
+                 faces: int,
+                 dropout_function: typing.Callable = None,
+                 dropout_rate: int = None) -> None:
+        self._times = times
+        self._face = faces
+        self._amount_function = dropout_function
+        self._amount_rate = dropout_rate
 
-        self._result = None
-        self._retain = None
+        self._amount = None
 
-    def to_str(self, view_retains=False, startswith_retain='<strike>', endswith_retain='</strike>') -> str:
-        if (not isinstance(self._all_result, list) or not self.retains) and view_retains:
-            view_retains = False
-        if view_retains and isinstance(self._all_result, list) and len(self.result) != len(self._all_result):
-            values = list(map(str, self._all_result)) if isinstance(self._all_result, list) else [str(self._all_result)]
-            retains, cut = list(map(str, self.retains)), []
-            for n, value in enumerate(values):
-                if value in retains:
-                    retains.remove(value)
+        self._dices: typing.List[Dice] = [Dice(face=faces) for _ in range(self._times)]
+
+        if any((dropout_function, dropout_rate)) and not all((dropout_rate, dropout_function)):
+            raise DiceError
+
+    def to_str(self, view_strike=False, startswith_strike='<strike>', endswith_strike='</strike>') -> str:
+        values = list(map(str, self.dices))
+        if view_strike:
+            amount = self.amount.copy()
+            for i, dice in enumerate(self.dices):
+                if dice in amount:
+                    amount.remove(dice)
                 else:
-                    cut.append(value)
-                    values[n] = f"{startswith_retain}{value}{endswith_retain}"
-        else:
-            values = map(str, self.result) if isinstance(self.result, list) else [str(self.result)]
-
+                    values[i] = f"{startswith_strike}{dice.result}{endswith_strike}"
         return f"[{'+'.join(values)}]"
 
     def __repr__(self) -> str:
-        return f"Dice(throw={self.throw}, face={self.face}, retain_f = {self._retain_f}, " \
-               f"retain_n = {self._retain_n}, result = {self.result})"
+        return f"DiceThrown(throw={self.times}, face={self.face}, amount_function = {self._amount_function}, " \
+               f"amount_rate = {self._amount_rate}, result = {self.total})"
 
-    def _get_retains(self) -> Optional[List[int]]:
-        if self._retain_n is None and self._retain_f is None:
-            return None
-        elif not all((self._retain_f, self._retain_n)):
+    def _get_amount(self) -> typing.Optional[typing.List[Dice]]:
+        if self._amount_function is None and self._amount_rate is None:
+            return self._dices
+        if any((self._amount_function, self._amount_rate)) and not all((self._amount_function, self._amount_rate)):
             raise DiceError("Unspecified retain formula or count for save")
-        elif self._retain_n > self._throw:
-            return None
-        all_results = self._all_result.copy()
+        elif self._amount_rate > self._times:
+            return self._dices
+        dices = self._dices.copy()
         results = []
-
-        for _ in range(self._retain_n):
-            exclude = self._retain_f(all_results)
-            all_results.remove(exclude)
+        for _ in range(self._amount_rate):
+            exclude = self._amount_function(dices)
+            dices.remove(exclude)
             results.append(exclude)
         return results
 
     @property
-    def _all_result(self) -> List[int]:
-        if not self._result:
-            self._result = [randint(1, self._face) for _ in range(self._throw)]
-        return self._result
-
-    @property
-    def throw(self) -> int:
-        return self._throw
+    def times(self) -> int:
+        return self._times
 
     @property
     def face(self) -> int:
         return self._face
 
     @property
-    def retains(self) -> Optional[List[int]]:
-        if self._retain is None:
-            self._retain = self._get_retains()
-        return self._retain
-
-    @property
-    def result(self) -> Optional[List[int]]:
-        list_results = self._all_result.copy()
-        if self.retains:
-            list_results = self._retain
-        return list_results
+    def amount(self) -> typing.Optional[typing.List[Dice]]:
+        if self._amount_function is None and self._amount_rate is None:
+            return self.dices
+        if self._amount is None:
+            self._amount = self._get_amount()
+        return self._amount
 
     @property
     def total(self) -> int:
-        return sum(self.result)
+        if self.amount:
+            return sum(self.amount)
+        return sum(self._dices)
+
+    @property
+    def dices(self) -> typing.List[Dice]:
+        return self._dices

@@ -23,17 +23,17 @@ def parse_roll_dice(tree: Tree) -> DiceThrown:
         thrown, face = [get_next_point(child) for child in tree.children]
     else:
         thrown, face = 1, get_next_point(*tree.children)
-    return DiceThrown(throw=thrown, face=face)
+    return DiceThrown(times=thrown, faces=face)
 
 
 def filtration_dices(tree: Tree) -> DiceThrown:
     dice: DiceThrown = get_next_point(tree.children[0])
 
     if tree.data == "max":
-        dice._retain_f = max
+        dice._amount_function = max
     elif tree.data == "min":
-        dice._retain_f = min
-    dice._retain_n = get_next_point(tree.children[1]) if len(tree.children) > 1 else 1
+        dice._amount_function = min
+    dice._amount_rate = get_next_point(tree.children[1]) if len(tree.children) > 1 else 1
     return dice
 
 
