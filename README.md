@@ -10,7 +10,9 @@ Powered by Lark
 
 ## Install
 
-> pip install rolling-dice
+```bash
+pip install pip install PowerfulDiceRoller
+```
 
 ## How to use
 
