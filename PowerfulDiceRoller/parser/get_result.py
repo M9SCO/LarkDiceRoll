@@ -1,8 +1,8 @@
 from re import search, findall
 from typing import List
 
-from PowerfulDiceRoller.models.Dice import Dice
-from PowerfulDiceRoller.models.Result import Result
+from PowerfulDiceRoller.models.DiceThrown import DiceThrown
+from PowerfulDiceRoller.models.LarkThrown import LarkThrown
 from PowerfulDiceRoller.models.errors.ParseError import ParseError
 from PowerfulDiceRoller.parser.lark_laboers import open_lark
 from PowerfulDiceRoller.resources import GRAMMAR_DICE, GRAMMAR_CALCULATOR
@@ -19,10 +19,10 @@ def get_result(text,
     repeats = repeats_math.group(1) or repeats_math.group(2) if repeats_math else 1
     for _ in range(int(repeats) if int(repeats) < 10 else 10):
         t = text.replace(repeats_math.group(0), "") if repeats_math else text
-        result = Result(raw=t)
+        result = LarkThrown(raw=t)
         result.dices = []
         for dice in findall(r"(\d*[dkдк]\d+[hlвнd]?\d*)", t):
-            value: Dice = open_lark(text=dice, grammar=grammar_dice)
+            value: DiceThrown = open_lark(text=dice, grammar=grammar_dice)
             result.dices.append((dice, value))
         result.total = open_lark(text=result.replaced_dices, grammar=grammar_calc)
         if str(result.total) == t:
